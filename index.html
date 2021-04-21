@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الاضافى</title>
+    <style>
+        #overtime{
+  color:red;
+}
+#overtime{
+  margin-bottom:20px
+}
+    </style>
+</head>
+<body>
+    <form  id="form">
+        <label for="in">انتهاء الوردية</label></br>
+        <input id="in" type="datetime-local"></br>
+        <label for="out">خروج من المحل</label></br>
+        <input id="out" type="datetime-local"> 
+        <p>عدد ساعات الاضافى</p>
+      <div id="overtime">00:00</div>
+        <button>احسب الاضافى</button>
+      </form>
+      <script>
+          const inWork = document.getElementById("in")
+const outWork = document.getElementById("out")
+const form = document.getElementById("form")
+const overtime = document.getElementById("overtime")
+
+form.addEventListener("submit",(event)=>{
+  event.preventDefault()
+  const din = new Date(inWork.value)
+  const dout = new Date(outWork.value)
+ const diff = Math.abs(din-dout);
+  overtime.innerText = msToTime(diff)
+})
+
+function msToTime(duration) {
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+  return hours + ":" + minutes 
+}
+      </script>
+</body>
+</html>
